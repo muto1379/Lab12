@@ -1,8 +1,8 @@
 /*
  * geometry_test.c
- * Andy Sayler
+ * Munkhbayan Togtokh
  * CSCI 3308
- * Summer 2014
+ * Spring 2018
  *
  * This file containsunit tests for geometry.c
  *
@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 #include <check.h>
-
+#include <math.h>
 #include "geometry.h"
 
 /* coord_2d_eq Test */
@@ -145,6 +145,33 @@ START_TEST(test_2d_midpoint)
 }
 END_TEST
 
+/* coord_2d_eq Test */
+START_TEST(test_2d_tr)
+{
+    coord_2d_t a;
+    coord_2d_t b;
+    coord_2d_t c;
+
+
+    a.x = 3.25;
+    a.y = 9.50;
+    b.x = 4.25;
+    b.y = 10.50;
+    c.x = 5.25;
+    c.y = 11.50;
+    ck_assert(coord_2d_area_triangle(&a, &b, &c) == 1.0);
+
+    a.x = 3.25;
+    a.y = 9.50;
+    b.x = 4.25;
+    b.y = 8.50;
+    c.x = 2.25;
+    c.y = 11.50;
+    ck_assert(coord_2d_area_triangle(&a, &b, &c) == 0.5);
+
+}
+END_TEST
+
 /* coord_2d Test Suite */
 Suite* coord_2d_suite(void)
 {
@@ -162,15 +189,21 @@ Suite* coord_2d_suite(void)
     TCase* tc_2d_midpoint = tcase_create("coord_2d_midpoint");
     tcase_add_test(tc_2d_midpoint, test_2d_midpoint);
 
+    TCase* tc_2d_tr = tcase_create("coord_2d_area");
+    tcase_add_test(tc_2d_tr, test_2d_tr);
+
     /* Add Cases to Suite */
     suite_add_tcase(s, tc_2d_eq);
     suite_add_tcase(s, tc_2d_dist);
     suite_add_tcase(s, tc_2d_midpoint);
-
+    suite_add_tcase(s, tc_2d_tr);
     /* Return Suite */
     return s;
 
 }
+
+
+
 
 /* main: run test suites and set exit status */
 int main(void){

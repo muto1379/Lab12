@@ -1,8 +1,8 @@
 /*
  * geometry.c
- * Andy Sayler
+ * Munkhbayan Togtokh
  * CSCI 3308
- * Summer 2014
+ * Spring 2018
  *
  * This file contains a simple geomtery functions.
  *
@@ -68,4 +68,31 @@ void coord_2d_midpoint(coord_2d_t* mid, const coord_2d_t* a, const coord_2d_t* b
     mid->x = ((a->x + b->x) / 2.0 );
     mid->y = ((a->y + b->y) / 2.0 );
 
+}
+double coord_2d_area_triangle(const coord_2d_t* a, const coord_2d_t* b, const coord_2d_t* c)
+{
+    //double thing = b->x - a->x;
+    double height = b->y - a->y;
+    //double thingThree = sqrt((thing*thing) + (thingTwo*thingTwo));
+
+    //double blah = c->x - b->x;
+   // double blahTwo = c->y - b->y;
+    //double blahThree = sqrt((blah*blah) + (blahTwo*blahTwo));
+
+    double width = c->x - a->x;
+    //double errTwo = c->y - a->y;
+    //double errThree = sqrt((err*err) + (errTwo*errTwo));
+
+
+    if (height < 0)
+    {
+        height = -height;
+    }
+    if (width < 0)
+    {
+        width = -width;
+    }
+
+    double goldenrod = .5*(height*width);
+    return goldenrod;
 }
